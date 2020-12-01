@@ -77,9 +77,11 @@ function draw() {
     score = score + Math.round(getFrameRate()/60);
     ground.velocityX = -(6 + 3*score/100);
   
-    if(keyDown("space") && trex.y >= height -40) {
+    if(keyDown("space") || touches.length > 0 && trex.y >= height -40) {
       trex.velocityY = -12;
+      touches = []
     }
+   
   
     trex.velocityY = trex.velocityY + 0.8
   
@@ -112,8 +114,9 @@ function draw() {
     obstaclesGroup.setLifetimeEach(-1);
     cloudsGroup.setLifetimeEach(-1);
     
-    if(mousePressedOver(restart)) {
+    if(mousePressedOver(restart)|| touches.length > 0) {
       reset();
+      touches = []
     }
   }
   
